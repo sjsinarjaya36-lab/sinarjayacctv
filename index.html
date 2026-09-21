@@ -27,37 +27,58 @@ body {
   background:#fff;
 }
 
-/* HEADER */
+/* HEADER PERBAIKAN */
 header {
-  background:var(--navy);
-  color:white;
-  padding:18px 6%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:15px;
+  background: var(--navy);
+  color: white;
+  padding: 12px 6%;
+  display: flex;
+  align-items: center; /* Memastikan semua elemen sejajar di tengah secara vertikal */
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .logo {
-  font-size:21px;
-  font-weight:bold;
+  display: flex;
+  align-items: center;
 }
 
-.logo span {
-  color:var(--yellow);
+.logo img {
+  height: 45px; /* Atur tinggi logo agar pas dengan header */
+  width: auto;  /* Menjaga proporsi gambar logo */
+  display: block;
 }
 
 nav {
-  display:flex;
-  gap:20px;
-  flex-wrap:wrap;
+  display: flex;
+  gap: 24px;
+  align-items: center;
 }
 
 nav a {
-  color:white;
-  text-decoration:none;
-  font-size:14px;
+  color: white;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: var(--yellow);
+}
+
+/* RESPONSIF UNTUK TAMPILAN HP */
+@media(max-width: 700px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px 6%;
+  }
+
+  nav {
+    gap: 15px;
+    justify-content: center;
+  }
 }
 
 /* ADMIN BUTTON */
@@ -339,7 +360,9 @@ footer a {
 <header>
 
   <div class="logo">
-    SINAR JAYA <span>CCTV</span>
+    <a href="#beranda">
+      <img src="LOGO SINAR JAYA.png" alt="Sinar Jaya CCTV">
+    </a>
   </div>
 
   <nav>
