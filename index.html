@@ -1,1015 +1,418 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sinar Jaya CCTV | Solusi Keamanan Modern</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
-<title>Sinar Jaya CCTV | Toko CCTV</title>
+  <style>
+    :root {
+      --primary: #facc15;
+      --primary-hover: #eab308;
+      --bg-dark: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.08);
+      --radius: 12px;
+    }
 
-<style>
-:root {
-  --navy:#101827;
-  --yellow:#facc15;
-  --white:#fff;
-  --gray:#f3f4f6;
-  --red:#ef4444;
-  --green:#22c55e;
-}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-* {
-  box-sizing:border-box;
-}
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
 
-body {
-  margin:0;
-  font-family:Arial,sans-serif;
-  color:#1f2937;
-  background:#fff;
-}
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-/* HEADER PERBAIKAN */
-header {
-  background: var(--navy);
-  color: white;
-  padding: 12px 6%;
-  display: flex;
-  align-items: center; /* Memastikan semua elemen sejajar di tengah secara vertikal */
-  justify-content: space-between;
-  gap: 20px;
-}
+    .logo img { height: 42px; width: auto; display: block; }
+    nav { display: flex; gap: 28px; align-items: center; }
+    nav a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: 0.2s; }
+    nav a:hover { color: var(--primary); }
 
-.logo {
-  display: flex;
-  align-items: center;
-}
+    .admin-btn {
+      background: rgba(250, 204, 21, 0.1);
+      color: var(--primary);
+      border: 1px solid rgba(250, 204, 21, 0.3);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+    }
+    .admin-btn:hover { background: var(--primary); color: #0f172a; }
 
-.logo img {
-  height: 150px; /* Atur tinggi logo agar pas dengan header */
-  width: auto;  /* Menjaga proporsi gambar logo */
-  display: block;
-}
+    .admin-panel {
+      display: none;
+      background: #020617;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 6%;
+      text-align: center;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .admin-panel.active { display: block; }
+    .admin-status { color: var(--primary); font-weight: 600; }
 
-nav {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-}
+    .hero {
+      padding: 80px 6%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 48px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(250, 204, 21, 0.1);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .hero h1 { font-size: clamp(36px, 4vw, 56px); font-weight: 700; line-height: 1.15; margin-bottom: 20px; }
+    .hero h1 span { background: linear-gradient(135deg, #facc15 0%, #f97316 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { color: var(--text-muted); font-size: 16px; margin-bottom: 32px; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  font-size: 15px;
-  font-weight: 500;
-  transition: color 0.2s;
-}
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--primary);
+      color: #0f172a;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: 0;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+    .btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+    .btn-secondary { background: rgba(255, 255, 255, 0.05); color: var(--text-main); border: 1px solid var(--border); }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); }
 
-nav a:hover {
-  color: var(--yellow);
-}
+    .hero-image { position: relative; }
+    .hero-image img { width: 100%; height: 400px; object-fit: cover; border-radius: 20px; border: 1px solid var(--border); }
 
-/* RESPONSIF UNTUK TAMPILAN HP */
-@media(max-width: 700px) {
-  header {
-    flex-direction: column;
-    text-align: center;
-    padding: 15px 6%;
-  }
+    section { padding: 80px 6%; max-width: 1280px; margin: 0 auto; }
+    .section-title { text-align: center; margin-bottom: 40px; }
+    .section-title h2 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .section-title p { color: var(--text-muted); font-size: 15px; }
 
-  nav {
-    gap: 15px;
-    justify-content: center;
-  }
-}
+    .filters { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+    input, select {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+    }
+    input:focus, select:focus { border-color: var(--primary); }
+    #search { width: min(100%, 320px); }
 
-/* ADMIN BUTTON */
-.admin-btn {
-  background:var(--yellow);
-  color:#111827;
-  border:0;
-  padding:10px 15px;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
-}
+    .products { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px; }
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; }
+    .card img { width: 100%; height: 180px; object-fit: cover; background: #020617; }
+    .card-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+    .tag { font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--primary); margin-bottom: 8px; }
+    .card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .price { font-size: 18px; font-weight: 700; color: #fff; margin-top: auto; margin-bottom: 16px; }
 
-.admin-btn:hover {
-  opacity:.85;
-}
+    .admin-tools { display: none; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+    body.admin-mode .admin-tools { display: flex; }
+    .btn-sm { padding: 6px 12px; font-size: 12px; border-radius: 6px; border: 0; cursor: pointer; font-weight: 600; flex: 1; }
+    .btn-blue { background: #2563eb; color: white; }
+    .btn-red { background: #ef4444; color: white; }
 
-/* HERO */
-.hero {
-  background:var(--navy);
-  color:white;
-  padding:65px 6%;
-  display:grid;
-  grid-template-columns:1.2fr 1fr;
-  align-items:center;
-  gap:35px;
-}
+    footer { text-align: center; padding: 60px 6%; border-top: 1px solid var(--border); }
 
-.hero h1 {
-  font-size:clamp(32px,5vw,52px);
-  margin:0 0 20px;
-}
-
-.hero h1 span {
-  color:var(--yellow);
-}
-
-.hero p {
-  line-height:1.8;
-  color:#d1d5db;
-}
-
-.hero img {
-  width:100%;
-  border-radius:18px;
-  object-fit:cover;
-  max-height:340px;
-}
-
-.btn {
-  display:inline-block;
-  background:var(--yellow);
-  color:#111827;
-  text-decoration:none;
-  font-weight:bold;
-  padding:14px 20px;
-  border-radius:8px;
-  margin-top:12px;
-  border:0;
-  cursor:pointer;
-}
-
-/* SECTION */
-section {
-  padding:50px 6%;
-}
-
-.section-title {
-  text-align:center;
-  margin-bottom:30px;
-}
-
-.section-title h2 {
-  font-size:30px;
-  margin-bottom:8px;
-}
-
-/* FILTER */
-.filters {
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-bottom:25px;
-}
-
-input,
-select {
-  padding:12px;
-  border:1px solid #ddd;
-  border-radius:8px;
-  font-size:15px;
-}
-
-#search {
-  width:min(100%,350px);
-}
-
-/* PRODUCTS */
-.products {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-}
-
-.card {
-  border:1px solid #e5e7eb;
-  border-radius:14px;
-  overflow:hidden;
-  background:white;
-  transition:.2s;
-}
-
-.card:hover {
-  transform:translateY(-3px);
-  box-shadow:0 8px 25px rgba(0,0,0,.08);
-}
-
-.card img {
-  width:100%;
-  height:190px;
-  object-fit:cover;
-  background:var(--gray);
-}
-
-.card-body {
-  padding:18px;
-}
-
-.tag {
-  font-size:12px;
-  color:#6b7280;
-}
-
-.price {
-  font-size:20px;
-  font-weight:bold;
-  margin:12px 0;
-}
-
-.card .btn {
-  width:100%;
-  text-align:center;
-}
-
-/* ADMIN AREA */
-.admin-panel {
-  display:none;
-  background:#111827;
-  color:white;
-  padding:15px 6%;
-  text-align:center;
-}
-
-.admin-panel.active {
-  display:block;
-}
-
-.admin-status {
-  color:#facc15;
-  font-weight:bold;
-}
-
-/* ADMIN PRODUCT BUTTON */
-.admin-tools {
-  display:none;
-  margin-top:10px;
-  gap:7px;
-  flex-wrap:wrap;
-}
-
-body.admin-mode .admin-tools {
-  display:flex;
-}
-
-.change-photo {
-  flex:1;
-  background:#2563eb;
-  color:white;
-  border:0;
-  padding:10px;
-  border-radius:7px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-.reset-photo {
-  background:var(--red);
-  color:white;
-  border:0;
-  padding:10px;
-  border-radius:7px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-.change-photo:hover,
-.reset-photo:hover {
-  opacity:.85;
-}
-
-/* SERVICES */
-.services {
-  background:var(--gray);
-}
-
-.service-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-}
-
-.service {
-  background:white;
-  padding:25px;
-  border-radius:12px;
-}
-
-/* FOOTER */
-footer {
-  background:var(--navy);
-  color:white;
-  text-align:center;
-  padding:30px 6%;
-  line-height:1.8;
-}
-
-footer a {
-  color:var(--yellow);
-}
-
-/* MOBILE */
-@media(max-width:700px) {
-
-  .hero {
-    grid-template-columns:1fr;
-    padding:45px 6%;
-  }
-
-  nav {
-    gap:12px;
-  }
-
-  header {
-    justify-content:center;
-  }
-
-}
-.hero-image {
-  position:relative;
-}
-
-.hero-image img {
-  width:100%;
-  height:380px;
-  object-fit:cover;
-  border-radius:20px;
-  display:block;
-  box-shadow:0 20px 45px rgba(0,0,0,.30);
-}
-
-.image-badge {
-  position:absolute;
-  bottom:18px;
-  left:18px;
-  background:rgba(16,24,39,.90);
-  color:white;
-  padding:12px 18px;
-  border-radius:10px;
-  font-weight:bold;
-  font-size:14px;
-}
-</style>
+    @media (max-width: 768px) {
+      header { flex-direction: column; gap: 16px; }
+      .hero { grid-template-columns: 1fr; padding: 40px 6%; }
+      .hero-image img { height: 260px; }
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- HEADER -->
-<header>
-
-  <div class="logo">
-    <a href="#beranda">
-      <img src="LOGO SINAR JAYA.png" alt="Sinar Jaya CCTV">
-    </a>
-  </div>
-
-  <nav>
-    <a href="#beranda">Beranda</a>
-    <a href="#produk">Produk</a>
-    <a href="#layanan">Layanan</a>
-    <a href="#kontak">Kontak</a>
-  </nav>
-
-  <button class="admin-btn" onclick="loginAdmin()">
-    🔐 Admin
-  </button>
-
-</header>
-
-
-<!-- ADMIN PANEL -->
-<div class="admin-panel" id="adminPanel">
-
-  <span class="admin-status">
-    🔓 MODE ADMIN AKTIF
-  </span>
-
-  &nbsp; | &nbsp;
-
-  Anda dapat mengubah foto produk.
-
-  &nbsp;
-
-  <button
-    class="admin-btn"
-    onclick="logoutAdmin()">
-    Keluar Admin
-  </button>
-
-</div>
-
-
-<main>
-
-<!-- HERO -->
-<section class="hero" id="beranda">
-
-  <div>
-
-    <p style="color:#facc15;font-weight:bold">
-      SOLUSI KEAMANAN ANDA
-    </p>
-
-    <h1>
-      Pantau Lebih Mudah,
-      <span>Lebih Aman.</span>
-    </h1>
-
-    <p>
-      Kamera, DVR, HDD, Alarm, Door Lock, Kabel, Elektrikal, Aksesoris dll.
-      Tersedia konsultasi produk dan layanan pemasangan
-      CCTV untuk Rumah, Toko, Kantor dan Bisnis.
-    </p>
-
-    <a class="btn" href="#produk">
-      Lihat Produk
-    </a>
-
-    <a
-      class="btn"
-      href="#kontak"
-      style="background:white;margin-left:8px">
-      Hubungi Kami
-    </a>
-
-  </div>
-
-  <div class="hero-image">
-
-	<img
-    src="Sinar Jaya.png"
-    alt="Sinar Jaya CCTV">
-
-	<div class="image-badge">
-    📹 CCTV • DVR • IP Camera
-	</div>
-
-  </div>
-
-</section>
-
-
-<!-- PRODUK -->
-<section id="produk">
-
-  <div class="section-title">
-
-    <h2>Katalog Produk</h2>
-
-    <p>
-      Pilih produk CCTV sesuai kebutuhan Anda.
-    </p>
-
-  </div>
-
-
-  <div class="filters">
-
-    <input
-      id="search"
-      placeholder="Cari nama produk..."
-      oninput="renderProducts()">
-
-    <select
-      id="category"
-      onchange="renderProducts()">
-
-      <option value="">
-        Semua kategori
-      </option>
-
-      <option>Kamera</option>
-      <option>DVR</option>
-      <option>Memory</option>
-      <option>Kabel</option>
-
-    </select>
-
-  </div>
-
-
-  <div
-    class="products"
-    id="products">
-  </div>
-
-</section>
-
-
-<!-- LAYANAN -->
-<section
-  class="services"
-  id="layanan">
-
-  <div class="section-title">
-
-    <h2>Layanan Kami</h2>
-
-    <p>
-      Solusi CCTV untuk kebutuhan Anda.
-    </p>
-
-  </div>
-
-
-  <div class="service-grid">
-
-    <div class="service">
-
-      <h3>📹 Penjualan CCTV</h3>
-
-      <p>
-        Kamera, DVR, HDD, Alarm, Door Lock, Kabel, Elektrikal, Aksesoris dll.
-      </p>
-
+  <header>
+    <div class="logo">
+      <a href="#beranda">
+        <img src="LOGO SINAR JAYA.png" alt="Sinar Jaya CCTV" onerror="this.src='https://placehold.co/150x40/facc15/0f172a?text=SINAR+JAYA'">
+      </a>
     </div>
 
+    <nav>
+      <a href="#beranda">Beranda</a>
+      <a href="#produk">Produk</a>
+      <a href="#layanan">Layanan</a>
+      <a href="#kontak">Kontak</a>
+    </nav>
 
-    <div class="service">
+    <button class="admin-btn" onclick="loginAdmin()">
+      <i class="ri-lock-line"></i> Admin Mode
+    </button>
+  </header>
 
-      <h3>🛠️ Instalasi CCTV</h3>
-
-      <p>
-        Pemasangan dan setting CCTV sesuai kebutuhan.
-      </p>
-
-    </div>
-
-
-    <div class="service">
-
-      <h3>🔧 Servis CCTV</h3>
-
-      <p>
-        Pemeriksaan dan perawatan sistem CCTV.
-      </p>
-
-    </div>
-
+  <div class="admin-panel" id="adminPanel">
+    <span class="admin-status">MODE ADMIN AKTIF</span> — Anda dapat mengubah foto produk.
+    <button class="admin-btn" onclick="logoutAdmin()" style="margin-left: 12px;">Keluar</button>
   </div>
 
-</section>
+  <main>
+    <section class="hero" id="beranda">
+      <div>
+        <div class="hero-badge">
+          <i class="ri-shield-check-line"></i> Solusi Keamanan Terpercaya
+        </div>
+        <h1>Pantau Lebih Mudah, <span>Lebih Aman.</span></h1>
+        <p>Kamera, DVR, HDD, Alarm, Door Lock, Kabel, Elektrikal, Aksesoris dll. Tersedia konsultasi produk dan layanan pemasangan CCTV.</p>
+        
+        <div class="hero-actions">
+          <a class="btn" href="#produk"><i class="ri-shopping-bag-line"></i> Lihat Produk</a>
+          <a class="btn btn-secondary" href="#kontak"><i class="ri-whatsapp-line"></i> Hubungi Kami</a>
+        </div>
+      </div>
 
-</main>
+      <div class="hero-image">
+        <img src="SJ.png" alt="Pemasangan CCTV">
+      </div>
+    </section>
 
+    <section id="produk">
+      <div class="section-title">
+        <h2>Katalog Produk</h2>
+        <p>Pilih produk CCTV sesuai kebutuhan Anda.</p>
+      </div>
 
-<!-- FOOTER -->
-<footer id="kontak">
+      <div class="filters">
+        <input id="search" placeholder="Cari nama produk..." oninput="renderProducts()">
+        <select id="category" onchange="renderProducts()">
+          <option value="">Semua Kategori</option>
+          <option value="kamera">Kamera</option>
+          <option value="dvr">DVR</option>
+          <option value="memory">Memory</option>
+          <option value="kabel">Kabel</option>
+        </select>
+      </div>
 
-  <h2>SINAR JAYA CCTV</h2>
+      <div class="products" id="products"></div>
+    </section>
+  </main>
 
-  <p>
-    Konsultasikan kebutuhan CCTV Anda bersama kami.
-  </p>
+  <footer id="kontak">
+    <h2>SINAR JAYA CCTV</h2>
+    <p>Konsultasikan kebutuhan CCTV Anda bersama kami.</p>
+    <a href="https://wa.me/6281217775870" target="_blank" class="btn">
+      <i class="ri-whatsapp-line"></i> Chat WhatsApp Admin
+    </a>
+    <p style="margin-top: 32px; font-size: 12px; color: var(--text-muted);">© 2026 Sinar Jaya CCTV</p>
+  </footer>
 
-  <p>
-    Jawa Timur dan sekitarnya
-  </p>
+  <script>
+    /* ========================================
+       DATA PRODUK
+    ======================================== */
+    const products = [
+      { id: "dahua-h3a", name: "Dahua DH-H3A 3MP", category: "Kamera", price: 271000, image: "https://placehold.co/600x400/1e293b/facc15?text=Dahua+H3A" },
+      { id: "ezviz-c6n", name: "EZVIZ C6N 3MP", category: "Kamera", price: 340000, image: "https://placehold.co/600x400/1e293b/facc15?text=EZVIZ+C6N" },
+      { id: "dahua-dvr", name: "Dahua XVR 4 Channel", category: "DVR", price: 524300, image: "https://placehold.co/600x400/1e293b/facc15?text=Dahua+DVR" },
+      { id: "hiview-64gb", name: "Hiview MicroSD 64GB", category: "Memory", price: 196000, image: "https://placehold.co/600x400/1e293b/facc15?text=MicroSD+64GB" },
+      { id: "rg59-infinity", name: "Kabel RG59 Infinity", category: "Kabel", price: 820000, image: "https://placehold.co/600x400/1e293b/facc15?text=Kabel+RG59" }
+    ];
 
-  <a
-    href="https://wa.me/6281217775870"
-    class="btn">
+    /* ========================================
+       KEAMANAN: HASH PASSWORD & SANITASI XSS
+    ======================================== */
+   
+    const ADMIN_PASSWORD_HASH = "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9";
 
-    Chat WhatsApp Admin
+    // Fungsi enkripsi SHA-256 bawaan browser
+    async function hashString(str) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(str);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
 
-  </a>
+    // Fungsi sanitasi HTML untuk mencegah XSS
+    function escapeHTML(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
 
-  <p>
-    © 2026 Sinar Jaya CCTV
-  </p>
+    /* ========================================
+       ADMIN & RENDER
+    ======================================== */
+    let adminMode = false;
 
-</footer>
+    const rupiah = n => new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      maximumFractionDigits: 0
+    }).format(n);
 
+    async function loginAdmin() {
+      if (adminMode) {
+        logoutAdmin();
+        return;
+      }
+      const inputPassword = prompt("Masukkan password admin:");
+      if (!inputPassword) return;
 
-<script>
+      const inputHash = await hashString(inputPassword);
 
-/* ========================================
-   DATA PRODUK
-======================================== */
+      if (inputHash === ADMIN_PASSWORD_HASH) {
+        adminMode = true;
+        document.body.classList.add("admin-mode");
+        document.getElementById("adminPanel").classList.add("active");
+        renderProducts();
+      } else {
+        alert("Password admin salah!");
+      }
+    }
 
-const products = [
+    function logoutAdmin() {
+      adminMode = false;
+      document.body.classList.remove("admin-mode");
+      document.getElementById("adminPanel").classList.remove("active");
+      renderProducts();
+    }
 
-  {
-    id:"dahua-h3a",
-    name:"Dahua DH-H3A 3MP",
-    category:"Kamera",
-    price:271000,
-    image:"https://placehold.co/600x400?text=Dahua+H3A"
-  },
+    function getProductImage(product) {
+      return localStorage.getItem("product_image_" + product.id) || product.image;
+    }
 
-  {
-    id:"ezviz-c6n",
-    name:"EZVIZ C6N 3MP",
-    category:"Kamera",
-    price:340000,
-    image:"https://placehold.co/600x400?text=EZVIZ+C6N"
-  },
+    function renderProducts() {
+      const search = document.getElementById("search").value.toLowerCase().trim();
+      const category = document.getElementById("category").value.toLowerCase().trim();
 
-  {
-    id:"dahua-dvr",
-    name:"Dahua XVR 4 Channel",
-    category:"DVR",
-    price:524300,
-    image:"https://placehold.co/600x400?text=Dahua+DVR"
-  },
+      const filtered = products.filter(p => {
+        const matchName = p.name.toLowerCase().includes(search);
+        const matchCategory = !category || p.category.toLowerCase() === category;
+        return matchName && matchCategory;
+      });
 
-  {
-    id:"hiview-64gb",
-    name:"Hiview MicroSD 64GB",
-    category:"Memory",
-    price:196000,
-    image:"https://placehold.co/600x400?text=MicroSD+64GB"
-  },
+      const container = document.getElementById("products");
 
-  {
-    id:"rg59-infinity",
-    name:"Kabel RG59 Infinity",
-    category:"Kabel",
-    price:820000,
-    image:"https://placehold.co/600x400?text=Kabel+RG59"
-  }
+      if (!filtered.length) {
+        container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">Produk tidak ditemukan.</p>`;
+        return;
+      }
 
-];
+      container.innerHTML = filtered.map(p => {
+        const safeId = escapeHTML(p.id);
+        const safeName = escapeHTML(p.name);
+        const safeCategory = escapeHTML(p.category);
+        const image = getProductImage(p);
+        const waText = encodeURIComponent(`Halo Sinar Jaya CCTV, saya ingin bertanya tentang produk: ${p.name}`);
 
+        return `
+          <article class="card">
+            <img src="${image}" alt="${safeName}" id="image-${safeId}">
+            <div class="card-body">
+              <div class="tag">${safeCategory}</div>
+              <h3>${safeName}</h3>
+              <div class="price">${rupiah(p.price)}</div>
+              
+              <a class="btn" href="https://wa.me/6281217775870?text=${waText}" target="_blank">
+                <i class="ri-whatsapp-line"></i> Pesan Sekarang
+              </a>
 
-/* ========================================
-   ADMIN
-======================================== */
+              <div class="admin-tools">
+                <input type="file" id="file-${safeId}" accept="image/*" style="display:none" onchange="changePhoto('${safeId}', this)">
+                <button class="btn-sm btn-blue" onclick="document.getElementById('file-${safeId}').click()">
+                  <i class="ri-image-edit-line"></i> Ubah
+                </button>
+                <button class="btn-sm btn-red" onclick="resetPhoto('${safeId}')">
+                  <i class="ri-refresh-line"></i> Reset
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
 
-let adminMode = false;
+    function changePhoto(productId, input) {
+      if (!adminMode) return alert("Silakan login sebagai admin.");
+      const file = input.files[0];
+      if (!file) return;
 
+      if (file.size > 2 * 1024 * 1024) {
+        alert("Ukuran gambar maksimal 2 MB.");
+        input.value = "";
+        return;
+      }
 
-/*
-   PASSWORD ADMIN
-   Silakan ganti password ini.
-*/
-const ADMIN_PASSWORD = "admin123";
+      if (!file.type.startsWith("image/")) {
+        alert("File harus berupa gambar.");
+        input.value = "";
+        return;
+      }
 
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          localStorage.setItem("product_image_" + productId, e.target.result);
+          renderProducts();
+        } catch (err) {
+          alert("Penyimpanan lokal penuh. Hapus beberapa gambar custom terlebih dahulu.");
+        }
+      };
+      reader.readAsDataURL(file);
+    }
 
-function loginAdmin() {
-
-  if (adminMode) {
-
-    logoutAdmin();
-
-    return;
-
-  }
-
-  const password = prompt(
-    "Masukkan password admin:"
-  );
-
-  if (password === ADMIN_PASSWORD) {
-
-    adminMode = true;
-
-    document.body.classList.add(
-      "admin-mode"
-    );
-
-    document
-      .getElementById("adminPanel")
-      .classList.add("active");
+    function resetPhoto(productId) {
+      if (!adminMode) return alert("Silakan login sebagai admin.");
+      if (confirm("Kembalikan foto ke standar?")) {
+        localStorage.removeItem("product_image_" + productId);
+        renderProducts();
+      }
+    }
 
     renderProducts();
-
-    alert(
-      "Login admin berhasil!"
-    );
-
-  } else {
-
-    alert(
-      "Password admin salah!"
-    );
-
-  }
-
-}
-
-
-function logoutAdmin() {
-
-  adminMode = false;
-
-  document.body.classList.remove(
-    "admin-mode"
-  );
-
-  document
-    .getElementById("adminPanel")
-    .classList.remove("active");
-
-  renderProducts();
-
-}
-
-
-/* ========================================
-   FORMAT RUPIAH
-======================================== */
-
-const rupiah = n =>
-  new Intl.NumberFormat("id-ID", {
-
-    style:"currency",
-
-    currency:"IDR",
-
-    maximumFractionDigits:0
-
-  }).format(n);
-
-
-/* ========================================
-   AMBIL FOTO CUSTOM DARI LOCAL STORAGE
-======================================== */
-
-function getProductImage(product) {
-
-  const savedImage =
-    localStorage.getItem(
-      "product_image_" + product.id
-    );
-
-  return savedImage || product.image;
-
-}
-
-
-/* ========================================
-   RENDER PRODUK
-======================================== */
-
-function renderProducts() {
-
-  const search =
-    document
-      .getElementById("search")
-      .value
-      .toLowerCase();
-
-  const category =
-    document
-      .getElementById("category")
-      .value;
-
-
-  const filtered =
-    products.filter(p =>
-
-      p.name
-        .toLowerCase()
-        .includes(search)
-
-      &&
-
-      (
-        !category ||
-        p.category === category
-      )
-
-    );
-
-
-  document
-    .getElementById("products")
-    .innerHTML =
-
-    filtered.length
-
-    ?
-
-    filtered.map(p => {
-
-      const image =
-        getProductImage(p);
-
-
-      return `
-
-        <article class="card">
-
-          <img
-            src="${image}"
-            alt="${p.name}"
-            id="image-${p.id}">
-
-          <div class="card-body">
-
-            <div class="tag">
-              ${p.category}
-            </div>
-
-            <h3>
-              ${p.name}
-            </h3>
-
-            <div class="price">
-              ${rupiah(p.price)}
-            </div>
-
-
-            <a
-              class="btn"
-              href="https://wa.me/6281217775870?text=${encodeURIComponent(
-                "Halo Sinar Jaya CCTV, saya ingin tanya produk " + p.name
-              )}">
-
-              Tanya / Pesan
-
-            </a>
-
-
-            <!-- ADMIN TOOLS -->
-
-            <div class="admin-tools">
-
-              <input
-                type="file"
-                id="file-${p.id}"
-                accept="image/*"
-                style="display:none"
-                onchange="changePhoto('${p.id}', this)">
-
-
-              <button
-                class="change-photo"
-                onclick="document.getElementById('file-${p.id}').click()">
-
-                📷 Ubah Foto
-
-              </button>
-
-
-              <button
-                class="reset-photo"
-                onclick="resetPhoto('${p.id}')">
-
-                ↩ Reset
-
-              </button>
-
-            </div>
-
-          </div>
-
-        </article>
-
-      `;
-
-    }).join("")
-
-    :
-
-    "<p>Produk tidak ditemukan.</p>";
-
-}
-
-
-/* ========================================
-   UBAH FOTO
-======================================== */
-
-function changePhoto(
-  productId,
-  input
-) {
-
-  if (!adminMode) {
-
-    alert(
-      "Silakan login sebagai admin."
-    );
-
-    return;
-
-  }
-
-
-  const file =
-    input.files[0];
-
-  if (!file) {
-    return;
-  }
-
-
-  /* BATAS 2 MB */
-
-  if (file.size > 2 * 1024 * 1024) {
-
-    alert(
-      "Ukuran gambar maksimal 2 MB."
-    );
-
-    input.value = "";
-
-    return;
-
-  }
-
-
-  /* CEK FILE */
-
-  if (!file.type.startsWith("image/")) {
-
-    alert(
-      "File harus berupa gambar."
-    );
-
-    input.value = "";
-
-    return;
-
-  }
-
-
-  const reader =
-    new FileReader();
-
-
-  reader.onload = function(e) {
-
-    const imageData =
-      e.target.result;
-
-
-    localStorage.setItem(
-      "product_image_" + productId,
-      imageData
-    );
-
-
-    renderProducts();
-
-
-    alert(
-      "Foto produk berhasil diubah!"
-    );
-
-  };
-
-
-  reader.readAsDataURL(file);
-
-}
-
-
-/* ========================================
-   RESET FOTO
-======================================== */
-
-function resetPhoto(productId) {
-
-  if (!adminMode) {
-
-    alert(
-      "Silakan login sebagai admin."
-    );
-
-    return;
-
-  }
-
-
-  const yakin =
-    confirm(
-      "Kembalikan foto produk ke foto bawaan?"
-    );
-
-
-  if (!yakin) {
-    return;
-  }
-
-
-  localStorage.removeItem(
-    "product_image_" + productId
-  );
-
-
-  renderProducts();
-
-
-  alert(
-    "Foto produk berhasil direset."
-  );
-
-}
-
-
-/* ========================================
-   START
-======================================== */
-
-renderProducts();
-
-</script>
-
+  </script>
 </body>
 </html>
-```
