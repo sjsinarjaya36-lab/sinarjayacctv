@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sinar Jaya CCTV | Toko CCTV</title>
+
+<style>
+:root {
+  --navy:#101827;
+  --yellow:#facc15;
+  --white:#fff;
+  --gray:#f3f4f6;
+  --red:#ef4444;
+  --green:#22c55e;
+}
+
+* {
+  box-sizing:border-box;
+}
+
+body {
+  margin:0;
+  font-family:Arial,sans-serif;
+  color:#1f2937;
+  background:#fff;
+}
+
+/* HEADER */
+header {
+  background:var(--navy);
+  color:white;
+  padding:18px 6%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:15px;
+}
+
+.logo {
+  font-size:21px;
+  font-weight:bold;
+}
+
+.logo span {
+  color:var(--yellow);
+}
+
+nav {
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+nav a {
+  color:white;
+  text-decoration:none;
+  font-size:14px;
+}
+
+/* ADMIN BUTTON */
+.admin-btn {
+  background:var(--yellow);
+  color:#111827;
+  border:0;
+  padding:10px 15px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.admin-btn:hover {
+  opacity:.85;
+}
+
+/* HERO */
+.hero {
+  background:var(--navy);
+  color:white;
+  padding:65px 6%;
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  align-items:center;
+  gap:35px;
+}
+
+.hero h1 {
+  font-size:clamp(32px,5vw,52px);
+  margin:0 0 20px;
+}
+
+.hero h1 span {
+  color:var(--yellow);
+}
+
+.hero p {
+  line-height:1.8;
+  color:#d1d5db;
+}
+
+.hero img {
+  width:100%;
+  border-radius:18px;
+  object-fit:cover;
+  max-height:340px;
+}
+
+.btn {
+  display:inline-block;
+  background:var(--yellow);
+  color:#111827;
+  text-decoration:none;
+  font-weight:bold;
+  padding:14px 20px;
+  border-radius:8px;
+  margin-top:12px;
+  border:0;
+  cursor:pointer;
+}
+
+/* SECTION */
+section {
+  padding:50px 6%;
+}
+
+.section-title {
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.section-title h2 {
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+/* FILTER */
+.filters {
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-bottom:25px;
+}
+
+input,
+select {
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  font-size:15px;
+}
+
+#search {
+  width:min(100%,350px);
+}
+
+/* PRODUCTS */
+.products {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+.card {
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  overflow:hidden;
+  background:white;
+  transition:.2s;
+}
+
+.card:hover {
+  transform:translateY(-3px);
+  box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.card img {
+  width:100%;
+  height:190px;
+  object-fit:cover;
+  background:var(--gray);
+}
+
+.card-body {
+  padding:18px;
+}
+
+.tag {
+  font-size:12px;
+  color:#6b7280;
+}
+
+.price {
+  font-size:20px;
+  font-weight:bold;
+  margin:12px 0;
+}
+
+.card .btn {
+  width:100%;
+  text-align:center;
+}
+
+/* ADMIN AREA */
+.admin-panel {
+  display:none;
+  background:#111827;
+  color:white;
+  padding:15px 6%;
+  text-align:center;
+}
+
+.admin-panel.active {
+  display:block;
+}
+
+.admin-status {
+  color:#facc15;
+  font-weight:bold;
+}
+
+/* ADMIN PRODUCT BUTTON */
+.admin-tools {
+  display:none;
+  margin-top:10px;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+body.admin-mode .admin-tools {
+  display:flex;
+}
+
+.change-photo {
+  flex:1;
+  background:#2563eb;
+  color:white;
+  border:0;
+  padding:10px;
+  border-radius:7px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.reset-photo {
+  background:var(--red);
+  color:white;
+  border:0;
+  padding:10px;
+  border-radius:7px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.change-photo:hover,
+.reset-photo:hover {
+  opacity:.85;
+}
+
+/* SERVICES */
+.services {
+  background:var(--gray);
+}
+
+.service-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+.service {
+  background:white;
+  padding:25px;
+  border-radius:12px;
+}
+
+/* FOOTER */
+footer {
+  background:var(--navy);
+  color:white;
+  text-align:center;
+  padding:30px 6%;
+  line-height:1.8;
+}
+
+footer a {
+  color:var(--yellow);
+}
+
+/* MOBILE */
+@media(max-width:700px) {
+
+  .hero {
+    grid-template-columns:1fr;
+    padding:45px 6%;
+  }
+
+  nav {
+    gap:12px;
+  }
+
+  header {
+    justify-content:center;
+  }
+
+}
+.hero-image {
+  position:relative;
+}
+
+.hero-image img {
+  width:100%;
+  height:380px;
+  object-fit:cover;
+  border-radius:20px;
+  display:block;
+  box-shadow:0 20px 45px rgba(0,0,0,.30);
+}
+
+.image-badge {
+  position:absolute;
+  bottom:18px;
+  left:18px;
+  background:rgba(16,24,39,.90);
+  color:white;
+  padding:12px 18px;
+  border-radius:10px;
+  font-weight:bold;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+
+  <div class="logo">
+    SINAR JAYA <span>CCTV</span>
+  </div>
+
+  <nav>
+    <a href="#beranda">Beranda</a>
+    <a href="#produk">Produk</a>
+    <a href="#layanan">Layanan</a>
+    <a href="#kontak">Kontak</a>
+  </nav>
+
+  <button class="admin-btn" onclick="loginAdmin()">
+    🔐 Admin
+  </button>
+
+</header>
+
+
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+
+  <span class="admin-status">
+    🔓 MODE ADMIN AKTIF
+  </span>
+
+  &nbsp; | &nbsp;
+
+  Anda dapat mengubah foto produk.
+
+  &nbsp;
+
+  <button
+    class="admin-btn"
+    onclick="logoutAdmin()">
+    Keluar Admin
+  </button>
+
+</div>
+
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="beranda">
+
+  <div>
+
+    <p style="color:#facc15;font-weight:bold">
+      SOLUSI KEAMANAN ANDA
+    </p>
+
+    <h1>
+      Pantau Lebih Mudah,
+      <span>Lebih Aman.</span>
+    </h1>
+
+    <p>
+      Kamera, DVR, HDD, Alarm, Door Lock, Kabel, Elektrikal, Aksesoris dll.
+      Tersedia konsultasi produk dan layanan pemasangan
+      CCTV untuk Rumah, Toko, Kantor dan Bisnis.
+    </p>
+
+    <a class="btn" href="#produk">
+      Lihat Produk
+    </a>
+
+    <a
+      class="btn"
+      href="#kontak"
+      style="background:white;margin-left:8px">
+      Hubungi Kami
+    </a>
+
+  </div>
+
+  <div class="hero-image">
+
+	<img
+    src="https://goinstalls.com/assets/upload/gallery/md8dvx2lhgggokw0w.jpg"
+    alt="Sinar Jaya CCTV">
+
+	<div class="image-badge">
+    📹 CCTV • DVR • IP Camera
+	</div>
+
+  </div>
+
+</section>
+
+
+<!-- PRODUK -->
+<section id="produk">
+
+  <div class="section-title">
+
+    <h2>Katalog Produk</h2>
+
+    <p>
+      Pilih produk CCTV sesuai kebutuhan Anda.
+    </p>
+
+  </div>
+
+
+  <div class="filters">
+
+    <input
+      id="search"
+      placeholder="Cari nama produk..."
+      oninput="renderProducts()">
+
+    <select
+      id="category"
+      onchange="renderProducts()">
+
+      <option value="">
+        Semua kategori
+      </option>
+
+      <option>Kamera</option>
+      <option>DVR</option>
+      <option>Memory</option>
+      <option>Kabel</option>
+
+    </select>
+
+  </div>
+
+
+  <div
+    class="products"
+    id="products">
+  </div>
+
+</section>
+
+
+<!-- LAYANAN -->
+<section
+  class="services"
+  id="layanan">
+
+  <div class="section-title">
+
+    <h2>Layanan Kami</h2>
+
+    <p>
+      Solusi CCTV untuk kebutuhan Anda.
+    </p>
+
+  </div>
+
+
+  <div class="service-grid">
+
+    <div class="service">
+
+      <h3>📹 Penjualan CCTV</h3>
+
+      <p>
+        Kamera, DVR, HDD, Alarm, Door Lock, Kabel, Elektrikal, Aksesoris dll.
+      </p>
+
+    </div>
+
+
+    <div class="service">
+
+      <h3>🛠️ Instalasi CCTV</h3>
+
+      <p>
+        Pemasangan dan setting CCTV sesuai kebutuhan.
+      </p>
+
+    </div>
+
+
+    <div class="service">
+
+      <h3>🔧 Servis CCTV</h3>
+
+      <p>
+        Pemeriksaan dan perawatan sistem CCTV.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer id="kontak">
+
+  <h2>SINAR JAYA CCTV</h2>
+
+  <p>
+    Konsultasikan kebutuhan CCTV Anda bersama kami.
+  </p>
+
+  <p>
+    Jawa Timur dan sekitarnya
+  </p>
+
+  <a
+    href="https://wa.me/6281217775870"
+    class="btn">
+
+    Chat WhatsApp Admin
+
+  </a>
+
+  <p>
+    © 2026 Sinar Jaya CCTV
+  </p>
+
+</footer>
+
+
+<script>
+
+/* ========================================
+   DATA PRODUK
+======================================== */
+
+const products = [
+
+  {
+    id:"dahua-h3a",
+    name:"Dahua DH-H3A 3MP",
+    category:"Kamera",
+    price:271000,
+    image:"https://placehold.co/600x400?text=Dahua+H3A"
+  },
+
+  {
+    id:"ezviz-c6n",
+    name:"EZVIZ C6N 3MP",
+    category:"Kamera",
+    price:340000,
+    image:"https://placehold.co/600x400?text=EZVIZ+C6N"
+  },
+
+  {
+    id:"dahua-dvr",
+    name:"Dahua XVR 4 Channel",
+    category:"DVR",
+    price:524300,
+    image:"https://placehold.co/600x400?text=Dahua+DVR"
+  },
+
+  {
+    id:"hiview-64gb",
+    name:"Hiview MicroSD 64GB",
+    category:"Memory",
+    price:196000,
+    image:"https://placehold.co/600x400?text=MicroSD+64GB"
+  },
+
+  {
+    id:"rg59-infinity",
+    name:"Kabel RG59 Infinity",
+    category:"Kabel",
+    price:820000,
+    image:"https://placehold.co/600x400?text=Kabel+RG59"
+  }
+
+];
+
+
+/* ========================================
+   ADMIN
+======================================== */
+
+let adminMode = false;
+
+
+/*
+   PASSWORD ADMIN
+   Silakan ganti password ini.
+*/
+const ADMIN_PASSWORD = "admin123";
+
+
+function loginAdmin() {
+
+  if (adminMode) {
+
+    logoutAdmin();
+
+    return;
+
+  }
+
+  const password = prompt(
+    "Masukkan password admin:"
+  );
+
+  if (password === ADMIN_PASSWORD) {
+
+    adminMode = true;
+
+    document.body.classList.add(
+      "admin-mode"
+    );
+
+    document
+      .getElementById("adminPanel")
+      .classList.add("active");
+
+    renderProducts();
+
+    alert(
+      "Login admin berhasil!"
+    );
+
+  } else {
+
+    alert(
+      "Password admin salah!"
+    );
+
+  }
+
+}
+
+
+function logoutAdmin() {
+
+  adminMode = false;
+
+  document.body.classList.remove(
+    "admin-mode"
+  );
+
+  document
+    .getElementById("adminPanel")
+    .classList.remove("active");
+
+  renderProducts();
+
+}
+
+
+/* ========================================
+   FORMAT RUPIAH
+======================================== */
+
+const rupiah = n =>
+  new Intl.NumberFormat("id-ID", {
+
+    style:"currency",
+
+    currency:"IDR",
+
+    maximumFractionDigits:0
+
+  }).format(n);
+
+
+/* ========================================
+   AMBIL FOTO CUSTOM DARI LOCAL STORAGE
+======================================== */
+
+function getProductImage(product) {
+
+  const savedImage =
+    localStorage.getItem(
+      "product_image_" + product.id
+    );
+
+  return savedImage || product.image;
+
+}
+
+
+/* ========================================
+   RENDER PRODUK
+======================================== */
+
+function renderProducts() {
+
+  const search =
+    document
+      .getElementById("search")
+      .value
+      .toLowerCase();
+
+  const category =
+    document
+      .getElementById("category")
+      .value;
+
+
+  const filtered =
+    products.filter(p =>
+
+      p.name
+        .toLowerCase()
+        .includes(search)
+
+      &&
+
+      (
+        !category ||
+        p.category === category
+      )
+
+    );
+
+
+  document
+    .getElementById("products")
+    .innerHTML =
+
+    filtered.length
+
+    ?
+
+    filtered.map(p => {
+
+      const image =
+        getProductImage(p);
+
+
+      return `
+
+        <article class="card">
+
+          <img
+            src="${image}"
+            alt="${p.name}"
+            id="image-${p.id}">
+
+          <div class="card-body">
+
+            <div class="tag">
+              ${p.category}
+            </div>
+
+            <h3>
+              ${p.name}
+            </h3>
+
+            <div class="price">
+              ${rupiah(p.price)}
+            </div>
+
+
+            <a
+              class="btn"
+              href="https://wa.me/6281217775870?text=${encodeURIComponent(
+                "Halo Sinar Jaya CCTV, saya ingin tanya produk " + p.name
+              )}">
+
+              Tanya / Pesan
+
+            </a>
+
+
+            <!-- ADMIN TOOLS -->
+
+            <div class="admin-tools">
+
+              <input
+                type="file"
+                id="file-${p.id}"
+                accept="image/*"
+                style="display:none"
+                onchange="changePhoto('${p.id}', this)">
+
+
+              <button
+                class="change-photo"
+                onclick="document.getElementById('file-${p.id}').click()">
+
+                📷 Ubah Foto
+
+              </button>
+
+
+              <button
+                class="reset-photo"
+                onclick="resetPhoto('${p.id}')">
+
+                ↩ Reset
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      `;
+
+    }).join("")
+
+    :
+
+    "<p>Produk tidak ditemukan.</p>";
+
+}
+
+
+/* ========================================
+   UBAH FOTO
+======================================== */
+
+function changePhoto(
+  productId,
+  input
+) {
+
+  if (!adminMode) {
+
+    alert(
+      "Silakan login sebagai admin."
+    );
+
+    return;
+
+  }
+
+
+  const file =
+    input.files[0];
+
+  if (!file) {
+    return;
+  }
+
+
+  /* BATAS 2 MB */
+
+  if (file.size > 2 * 1024 * 1024) {
+
+    alert(
+      "Ukuran gambar maksimal 2 MB."
+    );
+
+    input.value = "";
+
+    return;
+
+  }
+
+
+  /* CEK FILE */
+
+  if (!file.type.startsWith("image/")) {
+
+    alert(
+      "File harus berupa gambar."
+    );
+
+    input.value = "";
+
+    return;
+
+  }
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload = function(e) {
+
+    const imageData =
+      e.target.result;
+
+
+    localStorage.setItem(
+      "product_image_" + productId,
+      imageData
+    );
+
+
+    renderProducts();
+
+
+    alert(
+      "Foto produk berhasil diubah!"
+    );
+
+  };
+
+
+  reader.readAsDataURL(file);
+
+}
+
+
+/* ========================================
+   RESET FOTO
+======================================== */
+
+function resetPhoto(productId) {
+
+  if (!adminMode) {
+
+    alert(
+      "Silakan login sebagai admin."
+    );
+
+    return;
+
+  }
+
+
+  const yakin =
+    confirm(
+      "Kembalikan foto produk ke foto bawaan?"
+    );
+
+
+  if (!yakin) {
+    return;
+  }
+
+
+  localStorage.removeItem(
+    "product_image_" + productId
+  );
+
+
+  renderProducts();
+
+
+  alert(
+    "Foto produk berhasil direset."
+  );
+
+}
+
+
+/* ========================================
+   START
+======================================== */
+
+renderProducts();
+
+</script>
+
+</body>
+</html>
+```
